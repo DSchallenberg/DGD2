@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crownless Court</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <section id="lobby" class="panel lobby">
+      <h1>🜲 Crownless Court</h1>
+      <p class="subtitle">Moderne Multiplayer-Version des höfischen Rangspiels.</p>
+      <div class="grid">
+        <label>Name<input id="nameInput" type="text" placeholder="Dein Name" /></label>
+        <label>Raum<input id="roomInput" type="text" placeholder="z.B. hof-42" /></label>
+        <label>Spieler 4–8<input id="playersInput" type="number" min="4" max="8" value="4" /></label>
+        <label>Runden 1–30<input id="roundsInput" type="number" min="1" max="30" value="10" /></label>
+        <label class="toggle">Automatisch Bots auffüllen<input id="autoBotsInput" type="checkbox" /></label>
+      </div>
+      <div class="actions">
+        <button id="createBtn" class="primary">Raum erstellen</button>
+        <button id="joinBtn">Beitreten</button>
+        <button id="addBotBtn">Bot hinzufügen</button>
+        <button id="copyLinkBtn">Einladungslink kopieren</button>
+        <button id="startBtn" class="primary">Spiel starten</button>
+      </div>
+    </section>
+
+    <section id="game" class="panel game hidden">
+      <header class="topbar">
+        <div>
+          <h2 id="roomTitle">Raum</h2>
+          <div id="roundInfo" class="meta">Runde 0/0</div>
+        </div>
+        <div class="top-actions">
+          <div id="phaseInfo" class="badge">Lobby</div>
+          <div id="turnInfo" class="badge alt">Warten…</div>
+          <button id="leaveBtn" class="danger">Raum verlassen</button>
+        </div>
+      </header>
+
+      <section class="arena">
+        <aside class="left-col">
+          <div class="card-box">
+            <h3>Rangliste</h3>
+            <ul id="scoreList"></ul>
+          </div>
+          <div class="card-box">
+            <h3>Aktueller Stich</h3>
+            <p id="trickInfo">Noch kein Stich.</p>
+          </div>
+          <div class="card-box">
+            <h3>Austausch</h3>
+            <p id="exchangeInfo">Kein Austausch aktiv.</p>
+          </div>
+        </aside>
+
+        <section class="center-col">
+          <div id="tableCards" class="table-cards"></div>
+          <div id="banner" class="banner hidden"></div>
+
+          <div class="hand-wrap">
+            <h3>Deine Hand</h3>
+            <div id="handCards" class="hand-cards"></div>
+            <div class="actions">
+              <button id="playBtn" class="primary">Ausgewählte spielen</button>
+              <button id="passBtn">Passen</button>
+              <button id="exchangeBtn">Austausch senden</button>
+            </div>
+          </div>
+        </section>
+
+        <aside class="right-col card-box">
+          <h3>Chat</h3>
+          <div id="chatLog" class="chat-log"></div>
+          <div class="chat-input">
+            <input id="chatInput" type="text" placeholder="Nachricht" />
+            <button id="chatSend">Senden</button>
+          </div>
+        </aside>
+      </section>
+    </section>
+  </main>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="client.js"></script>
+</body>
+</html>
